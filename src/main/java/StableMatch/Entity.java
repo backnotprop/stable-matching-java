@@ -3,12 +3,13 @@ package StableMatch;
 import java.util.ArrayList;
 import java.util.Map;
 
+
 public class Entity {
 
     public Entity(Map base) {
         _id = (String) base.get("id");
         _name = (String) base.get("name");
-        _prefs = (ArrayList<Map<String,String>>) base.get("prefs");
+        _prefs = (ArrayList<Map>) base.get("prefs");
         _hasAcceptedSentProposal = false;
         _hasAcceptedReceivedProposal = false;
         _acceptedReceivedRank = -1;
@@ -26,11 +27,23 @@ public class Entity {
     private Boolean _hasAcceptedSentProposal;
     private Integer _acceptedReceivedID;
 
-    private ArrayList<Map<String,String>> _prefs;
+    private ArrayList<Map> _prefs;
+
+    public Integer getPreferenceStrength(String id) {
+        Integer s = -1;
+        for(Map pref: _prefs) {
+            if(((String)pref.get("id")).equals(id)) {
+                s = (Integer)pref.get("strength");
+                break;
+            }
+        }
+        return s;
+    }
+
 
     public String    getId() { return _id; }
     public String    getName() { return _name; }
-    public ArrayList getPrefs() { return _prefs; }
+    public ArrayList<Map> getPrefs() { return _prefs; }
     public Integer   getAcceptedSentRank(){ return _acceptedSentRank; }
     public Integer   getAcceptedSentID(){ return _acceptedSentID; }
     public Boolean   getHasAcceptedReceivedProposal(){ return _hasAcceptedReceivedProposal; }

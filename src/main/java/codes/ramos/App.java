@@ -10,7 +10,6 @@ import java.util.HashMap;
 import StableMatch.Entity;
 import StableMatch.StableMatch;
 
-
 public class App
 {
     public static void main( String[] args )
